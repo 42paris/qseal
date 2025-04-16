@@ -1,0 +1,30 @@
+#   _______          ____________________   _____  .____
+#   \_____  \        /   _____/\_   _____/  /  _  \ |    |
+#    /  / \  \       \_____  \  |    __)_  /  /_\  \|    |
+#   /   \_/.  \      /        \ |        \/    |    \    |___
+#   \_____\ \_/_____/_______  //_______  /\____|__  /_______ \
+#          \__>_____/       \/         \/         \/        \/
+#   Created by: {{ .Author }} at {{ .Date }}
+
+version: "1"
+
+# This is the name of the kubeseal controller
+controller_name: "sealed-secrets"
+
+# The namespace where the kubeseal controller is running
+controller_namespace: "kube-system"
+
+# The namespace where the sealed secrets are going to be created
+namespace: "default"
+
+# This is the list of the secrets that are going to be sealed
+# it syntax is a bit like kustomize
+# secrets:
+#   - name: my-secret
+#     sealed: "secrets/my-secret.env.sealed.yaml" the path of the sealed secrets (optional) default to secret.sealed.yaml
+#     env: "secrets/my-secret.env" the path of the env file (optional) default to secret.env
+#     files: # the list of files to be sealed (optional)
+#       - "secrets/my-secret.env"
+#       - "secrets/my-secret2.env"
+#     type: "kubernetes.io/dockerconfigjson" # the type of the secret (optional) default to Opaque
+secrets: []

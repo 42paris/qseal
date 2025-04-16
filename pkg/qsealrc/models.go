@@ -9,10 +9,10 @@ import (
 const QsealrcFileName = "qsealrc.yaml"
 
 type Qsealrc struct {
-	Version             string   `yaml:"version"`
-	Namespace           string   `yaml:"namespace"`
-	ControllerName      string   `yaml:"controller_name"`
-	ControllerNamespace string   `yaml:"controller_namespace"`
+	Version             string   `yaml:"version" default:"1"`
+	Namespace           string   `yaml:"namespace" required:"true"`
+	ControllerName      string   `yaml:"controller_name" required:"true"`
+	ControllerNamespace string   `yaml:"controller_namespace" required:"true"`
 	Secrets             []Secret `yaml:"secrets"`
 }
 

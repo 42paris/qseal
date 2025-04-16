@@ -2,7 +2,6 @@
 
 <img src="resources/gopher.png" alt="Gopher" width="200"/>
 
-
 **qseal** is a CLI tool that simplifies the process of sealing and unsealing Kubernetes secrets using [`kubeseal`](https://github.com/bitnami-labs/sealed-secrets). It uses a declarative configuration file (`qsealrc.yaml`) to manage your secrets.
 
 ## Features
@@ -34,6 +33,7 @@ qseal # without any command will run `qseal sync`
 | Command      | Description                                                                                    |
 | ------------ | ---------------------------------------------------------------------------------------------- |
 | `init`       | Initialize the `qsealrc.yaml` configuration file                                               |
+| `sync`       | Seal or unseal secrets based on the configuration file                                         |
 | `seal-all`   | Seal all secrets defined in the config file _(not recommended, use `qseal sync` or `qseal`)_   |
 | `unseal-all` | Unseal all secrets defined in the config file _(not recommended, use `qseal sync` or `qseal`)_ |
 | `completion` | Generate autocompletion script for your shell                                                  |

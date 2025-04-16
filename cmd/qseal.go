@@ -10,10 +10,9 @@ import (
 
 var RootCmd = &cobra.Command{
 	Use:   os.Args[0],
-	Short: "Qseal CLI allow to quickly seal and unseal your k8s secrets with kubeseal",
-	Long: `
-Qseal CLI allow to quickly seal and unseal your k8s secrets with kubeseal
-To know how to seal and unseal your secrets, it refer himself to the qsealrc.yaml file
+	Short: "qseal is a command-line tool that makes it easy to seal and unseal your Kubernetes secrets using kubeseal.",
+	Long: `qseal is a command-line tool that makes it easy to seal and unseal your Kubernetes secrets using kubeseal.
+It relies on the qsealrc.yaml file to determine how secrets should be sealed or unsealed.
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		qsealRc, err := qsealrc.Load()

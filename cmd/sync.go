@@ -6,9 +6,9 @@ import (
 	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
 )
 
-var sealAllCmd = &cobra.Command{
-	Use:   "seal-all",
-	Short: "Seal all secrets defined in the config file (not recommended, use `qseal sync` or `qseal` most of the time)",
+var syncCmd = &cobra.Command{
+	Use:   "sync",
+	Short: "Will sync all secrets defined in the config file",
 	Run: func(cmd *cobra.Command, args []string) {
 		qsealRc, err := qsealrc.Load()
 		if err != nil {
@@ -16,11 +16,11 @@ var sealAllCmd = &cobra.Command{
 			return
 		}
 
-		err = qseal.SealAll(*qsealRc)
+		err = qseal.Sync(*qsealRc)
 		if err != nil {
 			cmd.PrintErrln("error sealing secrets:", err)
 			return
 		}
-		cmd.Println("all secrets sealed successfully")
+		cmd.Println("all secrets synced successfully")
 	},
 }

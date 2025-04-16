@@ -8,7 +8,7 @@ import (
 
 var unsealAllCmd = &cobra.Command{
 	Use:   "unseal-all",
-	Short: "Unseal all secrets defined in the config file",
+	Short: "Unseal all secrets defined in the config file (not recommended, use `qseal sync` or `qseal` most of the time)",
 	Run: func(cmd *cobra.Command, args []string) {
 		qsealRc, err := qsealrc.Load()
 		if err != nil {

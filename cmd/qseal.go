@@ -35,4 +35,5 @@ func init() {
 	RootCmd.AddCommand(initCmd)
 	RootCmd.AddCommand(sealAllCmd)
 	RootCmd.AddCommand(unsealAllCmd)
+	RootCmd.AddCommand(syncCmd)
 }

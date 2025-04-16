@@ -8,8 +8,7 @@ import (
 
 var unsealAllCmd = &cobra.Command{
 	Use:   "unseal-all",
-	Short: "Unseal all secrets in the qsealrc.yaml file you should not use this command and use sync",
-	Long: `Unseal all secrets in the qsealrc.yaml file`,
+	Short: "Unseal all secrets defined in the config file",
 	Run: func(cmd *cobra.Command, args []string) {
 		qsealRc, err := qsealrc.Load()
 		if err != nil {

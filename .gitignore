@@ -1,1 +1,2 @@
-/qsealrc.yaml
+/qsealrc.yaml# Added by goreleaser init:
+dist/

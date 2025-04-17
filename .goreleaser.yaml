@@ -6,6 +6,10 @@
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
 
+gitlab_urls:
+  api: https://gitlab.42paris.fr/api/v4
+  download: https://gitlab.42paris.fr/
+
 version: 2
 
 before:

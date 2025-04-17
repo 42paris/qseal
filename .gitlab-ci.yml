@@ -13,4 +13,5 @@ release:
     # generate a changelog.
     GIT_DEPTH: 0
   script:
+    - export GITLAB_TOKEN=$CI_JOB_TOKEN
     - goreleaser release --clean

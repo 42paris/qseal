@@ -20,6 +20,53 @@ go install gitlab.42paris.fr/froz/qseal@latest
 
 You can also download the latest release from the [releases page](https://gitlab.42paris.fr/froz/qseal/-/releases).
 
+## Getting Started
+
+1. **Initialize the configuration file**:
+   After installing `qseal`, navigate to your project directory and run:
+
+   ```bash
+   qseal init
+   ```
+
+   This will create a `qsealrc.yaml` file in your project root.
+
+2. **Edit the configuration file**:
+   Open `qsealrc.yaml` and edit namespace and the controller values. You can add your secrets in the `secrets` section. Each secret should have the following structure:
+
+   ```yaml
+    - name: my-secret
+      sealed: "secrets/my-secret.env.sealed.yaml" the path of the sealed secrets (optional) default to {{secret_name}}.sealed.yaml
+      env: "secrets/my-secret.env" the path of the env file (optional)
+      files: # the list of files to be sealed (optional)
+        - "secrets/config.yaml"
+        - "secrets/my-secret2.yaml"
+      type: "kubernetes.io/dockerconfigjson" # the type of the secret (optional) default to Opaque
+   ```
+
+3. **Run `qseal` or `qseal sync`**:
+   After editing the configuration file, you can run `qseal` to created the sealed secrets. The command will automatically detect the changes and seal or unseal the secrets as needed.
+
+   ```bash
+   qseal
+   ```
+
+4. **Check the status**:
+   You can check the status of your secrets by running:
+
+   ```bash
+   qseal status
+   ```
+
+   This will show you the current state of your secrets and whether they will have to get sealed or unsealed.
+
+5. **Autocompletion**:
+   You can enable autocompletion for your shell by running:
+
+   ```bash
+   qseal completion --help
+   ```
+
 ## Usage
 
 ```bash
@@ -34,6 +81,7 @@ qseal # without any command will run `qseal sync`
 | ------------ | ---------------------------------------------------------------------------------------------- |
 | `init`       | Initialize the `qsealrc.yaml` configuration file                                               |
 | `sync`       | Seal or unseal secrets based on the configuration file                                         |
+| `status`     | Will show the status of the secrets and whether they will have to get sealed or unsealed       |
 | `seal-all`   | Seal all secrets defined in the config file _(not recommended, use `qseal sync` or `qseal`)_   |
 | `unseal-all` | Unseal all secrets defined in the config file _(not recommended, use `qseal sync` or `qseal`)_ |
 | `completion` | Generate autocompletion script for your shell                                                  |

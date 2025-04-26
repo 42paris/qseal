@@ -12,7 +12,7 @@
 
 ## Installation
 
-Clone the repository and build the binary:
+If your GOPATH is set up, you can install `qseal` using the following command:
 
 ```bash
 go install gitlab.42paris.fr/froz/qseal@latest

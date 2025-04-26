@@ -15,10 +15,10 @@
 If your GOPATH is set up, you can install `qseal` using the following command:
 
 ```bash
-go install gitlab.42paris.fr/froz/qseal@latest
+go install github.com/42paris/qseal@latest
 ```
 
-You can also download the latest release from the [releases page](https://gitlab.42paris.fr/froz/qseal/-/releases).
+You can also download the latest release from the [releases page](https://github.com/42paris/qseal/releases).
 
 ## Getting Started
 

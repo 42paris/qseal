@@ -5,8 +5,8 @@ import (
 	"crypto/rsa"
 	"os"
 
+	"github.com/42paris/qseal/pkg/qsealrc"
 	"github.com/bitnami-labs/sealed-secrets/pkg/kubeseal"
-	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 )

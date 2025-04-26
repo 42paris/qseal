@@ -6,9 +6,9 @@ import (
 	"io"
 	"os"
 
+	"github.com/42paris/qseal/pkg/qsealrc"
+	"github.com/42paris/qseal/pkg/secretgen"
 	ssv1alpha1 "github.com/bitnami-labs/sealed-secrets/pkg/apis/sealedsecrets/v1alpha1"
-	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
-	"gitlab.42paris.fr/froz/qseal/pkg/secretgen"
 	"k8s.io/apimachinery/pkg/util/yaml"
 	"k8s.io/client-go/kubernetes/scheme"
 )

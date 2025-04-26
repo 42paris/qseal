@@ -1,4 +1,4 @@
-module gitlab.42paris.fr/froz/qseal
+module github.com/42paris/qseal
 
 go 1.24.0
 

@@ -3,9 +3,8 @@ package qseal
 import (
 	"fmt"
 
-	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
+	"github.com/42paris/qseal/pkg/qsealrc"
 )
-
 
 func UnsealAll(qsealRc qsealrc.Qsealrc) error {
 	sealClient, err := NewKubeSealClient(qsealRc)

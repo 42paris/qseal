@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"gitlab.42paris.fr/froz/qseal/cmd"
+	"github.com/42paris/qseal/cmd"
 )
 
 func main() {

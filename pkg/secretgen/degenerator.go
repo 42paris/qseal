@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
+	"github.com/42paris/qseal/pkg/qsealrc"
 	corev1 "k8s.io/api/core/v1"
 )
 

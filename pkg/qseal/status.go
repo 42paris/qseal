@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/42paris/qseal/pkg/qsealrc"
 	"github.com/fatih/color"
-	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
 )
 
 var (
@@ -48,7 +48,6 @@ func logSecretAction(action SyncAction, sealedPath string, secrets []qsealrc.Sec
 		len(secrets),
 	)
 }
-
 
 func getSecretsStatus(qsealRc qsealrc.Qsealrc) (map[string][]qsealrc.Secret, map[string]SyncAction, error) {
 	secretsBySealedPath := make(map[string][]qsealrc.Secret)

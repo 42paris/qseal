@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
+	"github.com/42paris/qseal/pkg/qsealrc"
 )
 
 func SealAll(qsealRc qsealrc.Qsealrc) error {

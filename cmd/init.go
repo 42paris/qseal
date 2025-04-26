@@ -1,8 +1,8 @@
 package cmd
 
 import (
+	"github.com/42paris/qseal/pkg/qsealrc"
 	"github.com/spf13/cobra"
-	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
 )
 
 var initCmd = &cobra.Command{

@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitlab.42paris.fr/froz/qseal/pkg/kubemodels"
-	"gitlab.42paris.fr/froz/qseal/pkg/qsealrc"
+	"github.com/42paris/qseal/pkg/kubemodels"
+	"github.com/42paris/qseal/pkg/qsealrc"
 )
 
 func Gen(secret qsealrc.Secret) (*kubemodels.Secret, error) {
@@ -45,7 +45,7 @@ func Gen(secret qsealrc.Secret) (*kubemodels.Secret, error) {
 		}
 		return kubeSecret, nil
 	}
-	
+
 	// in the case of files
 	for _, filePath := range secret.Files {
 		file, err := os.Open(filePath)

@@ -62,9 +62,15 @@ func getSecretsStatus(qsealRc qsealrc.Qsealrc) (map[string][]qsealrc.Secret, map
 			return nil, nil, fmt.Errorf("error deciding sync action for secret %s: %v", secret.Name, err)
 		}
 		existingAction, ok := actionBySealedPath[sealedPath]
+		if ok && action == SyncActionDoNothing {
+			// if we have already a action for this sealed path and
+			// the action is do nothing we don't overwrite it
+			continue
+		}
+
 		// is have already a action for this sealed path that is not
 		// the same as the one we are trying to add this mean we have a conflict
-		if ok && existingAction != SyncActionDoNothing && existingAction != action {
+		if ok && existingAction != action {
 			return nil, nil, fmt.Errorf(
 				"conflict for sealed secret %s: %s (%s) and %s (%s) try resolve the conflict by seal-all or unseal-all",
 				sealedPath,

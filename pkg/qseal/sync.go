@@ -3,6 +3,7 @@ package qseal
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/42paris/qseal/pkg/qsealrc"
 )
@@ -20,6 +21,7 @@ func Sync(qsealRc qsealrc.Qsealrc) error {
 	if err != nil {
 		return fmt.Errorf("error retrieving private keys: %v", err)
 	}
+	now := time.Now()
 	for sealedPath, secrets := range secretsBySealedPath {
 		logSecretAction(actionBySealedPath[sealedPath], sealedPath, secrets)
 		switch actionBySealedPath[sealedPath] {
@@ -29,14 +31,14 @@ func Sync(qsealRc qsealrc.Qsealrc) error {
 				return fmt.Errorf("error clearing file %s: %v", sealedPath, err)
 			}
 			for _, secret := range secrets {
-				err = sealClient.Seal(secret)
+				err = sealClient.Seal(secret, now)
 				if err != nil {
 					return fmt.Errorf("error sealing secret %s: %v", secret.Name, err)
 				}
 			}
 		case SyncActionUnseal:
 			for _, secret := range secrets {
-				err = sealClient.Unseal(secret, keySet)
+				err = sealClient.Unseal(secret, now, keySet)
 				if err != nil {
 					return fmt.Errorf("error unsealing secret %s: %v", secret.Name, err)
 				}

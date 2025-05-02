@@ -57,6 +57,7 @@ func getSecretsStatus(qsealRc qsealrc.Qsealrc) (map[string][]qsealrc.Secret, map
 		if err != nil {
 			return nil, nil, fmt.Errorf("error getting sealed path for secret %s: %v", secret.Name, err)
 		}
+		secretsBySealedPath[sealedPath] = append(secretsBySealedPath[sealedPath], secret)
 		action, err := decideSyncAction(sealedPath, secret)
 		if err != nil {
 			return nil, nil, fmt.Errorf("error deciding sync action for secret %s: %v", secret.Name, err)
@@ -79,7 +80,6 @@ func getSecretsStatus(qsealRc qsealrc.Qsealrc) (map[string][]qsealrc.Secret, map
 				secret.Name)
 		}
 		actionBySealedPath[sealedPath] = action
-		secretsBySealedPath[sealedPath] = append(secretsBySealedPath[sealedPath], secret)
 	}
 	return secretsBySealedPath, actionBySealedPath, nil
 }

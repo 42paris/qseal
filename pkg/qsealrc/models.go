@@ -56,8 +56,7 @@ func (secret Secret) SealedPath() (string, error) {
 	return "", fmt.Errorf("no sealed path could be determined for secret %s", secret.Name)
 }
 
-func (secret Secret) SyncFileTime() error {
-	now := time.Now()
+func (secret Secret) SyncFileTime(now time.Time) error {
 	sealedPath, err := secret.SealedPath()
 	if err != nil {
 		return err

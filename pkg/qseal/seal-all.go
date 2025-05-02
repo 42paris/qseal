@@ -3,6 +3,7 @@ package qseal
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/42paris/qseal/pkg/qsealrc"
 )
@@ -12,6 +13,7 @@ func SealAll(qsealRc qsealrc.Qsealrc) error {
 	if err != nil {
 		return err
 	}
+	now := time.Now()
 	sealedPaths := make(map[string]bool)
 	for _, secret := range qsealRc.Secrets {
 		sealedPath, err := secret.SealedPath()
@@ -29,7 +31,7 @@ func SealAll(qsealRc qsealrc.Qsealrc) error {
 			sealedPaths[sealedPath] = true
 		}
 
-		err = sealClient.Seal(secret)
+		err = sealClient.Seal(secret, now)
 		if err != nil {
 			return err
 		}

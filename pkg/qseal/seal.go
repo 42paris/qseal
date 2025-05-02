@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/fs"
 	"os"
+	"time"
 
 	"github.com/42paris/qseal/pkg/qsealrc"
 	"github.com/42paris/qseal/pkg/secretgen"
@@ -14,7 +15,7 @@ import (
 	"k8s.io/client-go/kubernetes/scheme"
 )
 
-func (k *KubeSealClient) Seal(secret qsealrc.Secret) error {
+func (k *KubeSealClient) Seal(secret qsealrc.Secret, launchTime time.Time) error {
 	err := secret.Validate()
 	if err != nil {
 		return err
@@ -62,9 +63,14 @@ func (k *KubeSealClient) Seal(secret qsealrc.Secret) error {
 		return err
 	}
 	// we update the date of the files
-	err = secret.SyncFileTime()
+	err = secret.SyncFileTime(launchTime)
 	if err != nil {
 		return fmt.Errorf("error updating the date of the secrets %s: %v", sealedPath, err)
+	}
+	// we also update the date of the sealed secret
+	err = os.Chtimes(sealedPath, launchTime, launchTime)
+	if err != nil {
+		return fmt.Errorf("error updating the date of the sealed secret %s: %v", sealedPath, err)
 	}
 	return nil
 }

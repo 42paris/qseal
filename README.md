@@ -36,8 +36,8 @@ You can also download the latest release from the [releases page](https://github
 
    ```yaml
     - name: my-secret
-      sealed: "secrets/my-secret.env.sealed.yaml" the path of the sealed secrets (optional) default to {{secret_name}}.sealed.yaml
-      env: "secrets/my-secret.env" the path of the env file (optional)
+      sealed: "secrets/my-secret.env.sealed.yaml" # the path of the sealed secrets (optional) default to {{secret_name}}.sealed.yaml
+      env: "secrets/my-secret.env" # the path of the env file (optional)
       files: # the list of files to be sealed (optional)
         - "secrets/config.yaml"
         - "secrets/my-secret2.yaml"
@@ -45,7 +45,7 @@ You can also download the latest release from the [releases page](https://github
    ```
 
 3. **Run `qseal` or `qseal sync`**:
-   After editing the configuration file, you can run `qseal` to created the sealed secrets. The command will automatically detect the changes and seal or unseal the secrets as needed.
+   After editing the configuration file, you can run `qseal` to create the sealed secrets. The command will automatically detect the changes and seal or unseal the secrets as needed.
 
    ```bash
    qseal

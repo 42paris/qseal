@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/rsa"
 	"fmt"
-	"log"
 
 	"github.com/bitnami-labs/sealed-secrets/pkg/crypto"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -18,7 +17,7 @@ const labelSelector = "sealedsecrets.bitnami.com/sealed-secrets-key"
 func (k *KubeSealClient) RetrievePrivateKeys() (map[string]*rsa.PrivateKey, error) {
 	clientset, err := k.getClientSet()
 	if err != nil {
-		log.Fatalf("Failed to create clientset: %v", err)
+		return nil, fmt.Errorf("failed to create clientset: %v", err)
 	}
 
 	secrets, err := clientset.CoreV1().

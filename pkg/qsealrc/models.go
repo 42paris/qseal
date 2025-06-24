@@ -30,15 +30,8 @@ type Secret struct {
 }
 
 func (s Secret) Validate() error {
-	optionThere := false
-	if s.Env != nil {
-		optionThere = true
-	}
-	if len(s.Files) > 0 {
-		if optionThere {
-			return fmt.Errorf("you can only use one of env or files for qseal secret %s", s.Name)
-		}
-		optionThere = true
+	if s.Env != nil && len(s.Files) > 0 {
+		return fmt.Errorf("you can only use one of env or files for qseal secret %s", s.Name)
 	}
 	return nil
 }

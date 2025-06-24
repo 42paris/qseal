@@ -19,7 +19,7 @@ func UnsealAll(qsealRc qsealrc.Qsealrc) error {
 	for _, secret := range qsealRc.Secrets {
 		err := sealClient.Unseal(secret, keySet)
 		if err != nil {
-			return fmt.Errorf("error unsealing secret %s: %v", secret.Name, err)
+			return fmt.Errorf("error unsealing secret %s: %w", secret.Name, err)
 		}
 	}
 	return nil

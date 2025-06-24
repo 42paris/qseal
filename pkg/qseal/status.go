@@ -28,7 +28,7 @@ const timeFormat = "2006-01-02 15:04:05"
 func Status(qsealRc qsealrc.Qsealrc) error {
 	secretsBySealedPath, actionBySealedPath, err := getSecretsStatus(qsealRc)
 	if err != nil {
-		return fmt.Errorf("error getting secrets status: %v", err)
+		return fmt.Errorf("error getting secrets status: %w", err)
 	}
 	for sealedPath, secrets := range secretsBySealedPath {
 		logSecretAction(actionBySealedPath[sealedPath], sealedPath, secrets)
@@ -55,11 +55,11 @@ func getSecretsStatus(qsealRc qsealrc.Qsealrc) (map[string][]qsealrc.Secret, map
 	for _, secret := range qsealRc.Secrets {
 		sealedPath, err := secret.SealedPath()
 		if err != nil {
-			return nil, nil, fmt.Errorf("error getting sealed path for secret %s: %v", secret.Name, err)
+			return nil, nil, fmt.Errorf("error getting sealed path for secret %s: %w", secret.Name, err)
 		}
 		action, err := decideSyncAction(sealedPath, secret)
 		if err != nil {
-			return nil, nil, fmt.Errorf("error deciding sync action for secret %s: %v", secret.Name, err)
+			return nil, nil, fmt.Errorf("error deciding sync action for secret %s: %w", secret.Name, err)
 		}
 		existingAction, ok := actionBySealedPath[sealedPath]
 		// is have already a action for this sealed path that is not
@@ -86,7 +86,7 @@ func decideSyncAction(sealedPath string, secret qsealrc.Secret) (SyncAction, err
 		if os.IsNotExist(err) {
 			return SyncActionSeal, nil
 		}
-		return SyncActionDoNothing, fmt.Errorf("error checking file %s: %v", sealedPath, err)
+		return SyncActionDoNothing, fmt.Errorf("error checking file %s: %w", sealedPath, err)
 	}
 	// if we have a env file we gatter the date of the file
 	var sourceFileDate time.Time
@@ -96,7 +96,7 @@ func decideSyncAction(sealedPath string, secret qsealrc.Secret) (SyncAction, err
 			if os.IsNotExist(err) {
 				return SyncActionUnseal, nil
 			}
-			return SyncActionDoNothing, fmt.Errorf("error checking file %s: %v", *secret.Env, err)
+			return SyncActionDoNothing, fmt.Errorf("error checking file %s: %w", *secret.Env, err)
 		}
 	} else {
 		// we check the files and we keep the most recent date
@@ -106,7 +106,7 @@ func decideSyncAction(sealedPath string, secret qsealrc.Secret) (SyncAction, err
 				if os.IsNotExist(err) {
 					return SyncActionUnseal, nil
 				}
-				return SyncActionDoNothing, fmt.Errorf("error checking file %s: %v", file, err)
+				return SyncActionDoNothing, fmt.Errorf("error checking file %s: %w", file, err)
 			}
 			if fileDate.After(sourceFileDate) {
 				sourceFileDate = fileDate

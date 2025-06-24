@@ -24,7 +24,7 @@ func SealAll(qsealRc qsealrc.Qsealrc) error {
 			// we clear the file
 			err = os.WriteFile(sealedPath, []byte{}, 0644)
 			if err != nil {
-				return fmt.Errorf("error clearing file %s: %v", sealedPath, err)
+				return fmt.Errorf("error clearing file %s: %w", sealedPath, err)
 			}
 			sealedPaths[sealedPath] = true
 		}

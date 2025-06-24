@@ -29,7 +29,7 @@ func Gen(secret qsealrc.Secret) (*kubemodels.Secret, error) {
 		envPath := *secret.Env
 		file, err := os.Open(envPath)
 		if err != nil {
-			return nil, fmt.Errorf("failed to open env file %s: %v", envPath, err)
+			return nil, fmt.Errorf("failed to open env file %s: %w", envPath, err)
 		}
 		defer file.Close()
 		reader := io.Reader(file)
@@ -50,7 +50,7 @@ func Gen(secret qsealrc.Secret) (*kubemodels.Secret, error) {
 	for _, filePath := range secret.Files {
 		file, err := os.Open(filePath)
 		if err != nil {
-			return nil, fmt.Errorf("failed to open file %s: %v", filePath, err)
+			return nil, fmt.Errorf("failed to open file %s: %w", filePath, err)
 		}
 		defer file.Close()
 		// we keep the file name without the path

@@ -15,7 +15,7 @@ func DeGen(unsealed *corev1.Secret, secret qsealrc.Secret) error {
 		envPath := *secret.Env
 		file, err := os.OpenFile(envPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 		if err != nil {
-			return fmt.Errorf("failed to open env file %s: %v", envPath, err)
+			return fmt.Errorf("failed to open env file %s: %w", envPath, err)
 		}
 		defer file.Close()
 		writer := io.Writer(file)
@@ -23,7 +23,7 @@ func DeGen(unsealed *corev1.Secret, secret qsealrc.Secret) error {
 			// Write the key-value pair to the env file
 			_, err := fmt.Fprintf(writer, "%s=%s\n", key, value)
 			if err != nil {
-				return fmt.Errorf("failed to write to env file %s: %v", envPath, err)
+				return fmt.Errorf("failed to write to env file %s: %w", envPath, err)
 			}
 		}
 		return nil
@@ -32,7 +32,7 @@ func DeGen(unsealed *corev1.Secret, secret qsealrc.Secret) error {
 	for _, filePath := range secret.Files {
 		file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 		if err != nil {
-			return fmt.Errorf("failed to open file %s: %v", filePath, err)
+			return fmt.Errorf("failed to open file %s: %w", filePath, err)
 		}
 		defer file.Close()
 		// we keep the file name without the path
@@ -43,7 +43,7 @@ func DeGen(unsealed *corev1.Secret, secret qsealrc.Secret) error {
 		}
 		_, err = file.Write(data)
 		if err != nil {
-			return fmt.Errorf("failed to write to file %s: %v", filePath, err)
+			return fmt.Errorf("failed to write to file %s: %w", filePath, err)
 		}
 	}
 	return nil

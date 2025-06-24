@@ -64,7 +64,7 @@ func (k *KubeSealClient) Seal(secret qsealrc.Secret) error {
 	// we update the date of the files
 	err = secret.SyncFileTime()
 	if err != nil {
-		return fmt.Errorf("error updating the date of the secrets %s: %v", sealedPath, err)
+		return fmt.Errorf("error updating the date of the secrets %s: %w", sealedPath, err)
 	}
 	return nil
 }

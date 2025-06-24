@@ -54,7 +54,7 @@ func (*KubeSealClient) Unseal(secret qsealrc.Secret, keySet map[string]*rsa.Priv
 	// this allow us to sync smartly the sealed secret with the source and vice versa
 	err = secret.SyncFileTime()
 	if err != nil {
-		return fmt.Errorf("error updating the date of the secrets %s: %v", sealedPath, err)
+		return fmt.Errorf("error updating the date of the secrets %s: %w", sealedPath, err)
 	}
 	return nil
 }

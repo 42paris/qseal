@@ -57,13 +57,13 @@ func (secret Secret) SyncFileTime() error {
 	}
 	err = os.Chtimes(sealedPath, now, now)
 	if err != nil {
-		return fmt.Errorf("error updating the date of the sealed secret %s: %v", sealedPath, err)
+		return fmt.Errorf("error updating the date of the sealed secret %s: %w", sealedPath, err)
 	}
 	// we update the date of the env if not nil
 	if secret.Env != nil {
 		err = os.Chtimes(*secret.Env, now, now)
 		if err != nil {
-			return fmt.Errorf("error updating the date of the env %s: %v", *secret.Env, err)
+			return fmt.Errorf("error updating the date of the env %s: %w", *secret.Env, err)
 		}
 		return nil
 	}
@@ -71,7 +71,7 @@ func (secret Secret) SyncFileTime() error {
 	for _, file := range secret.Files {
 		err = os.Chtimes(file, now, now)
 		if err != nil {
-			return fmt.Errorf("error updating the date of the file %s: %v", file, err)
+			return fmt.Errorf("error updating the date of the file %s: %w", file, err)
 		}
 	}
 	return nil

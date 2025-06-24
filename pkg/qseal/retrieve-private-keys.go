@@ -17,7 +17,7 @@ const labelSelector = "sealedsecrets.bitnami.com/sealed-secrets-key"
 func (k *KubeSealClient) RetrievePrivateKeys() (map[string]*rsa.PrivateKey, error) {
 	clientset, err := k.getClientSet()
 	if err != nil {
-		return nil, fmt.Errorf("failed to create clientset: %v", err)
+		return nil, fmt.Errorf("failed to create clientset: %w", err)
 	}
 
 	secrets, err := clientset.CoreV1().

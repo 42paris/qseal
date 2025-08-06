@@ -22,3 +22,7 @@ var initCmd = &cobra.Command{
 		}
 	},
 }
+
+func init() {
+	initCmd.PersistentFlags().BoolP("ignore-parents", "i", false, "ignore existing qsealrc.yaml files in parent directories")
+}

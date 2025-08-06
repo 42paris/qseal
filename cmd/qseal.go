@@ -37,4 +37,6 @@ func init() {
 	RootCmd.AddCommand(unsealAllCmd)
 	RootCmd.AddCommand(syncCmd)
 	RootCmd.AddCommand(statusCmd)
+
+	initCmd.PersistentFlags().BoolP("ignore-parents", "i", false, "ignore existing qsealrc.yaml files in parent directories")
 }

@@ -46,6 +46,14 @@ func (k *KubeSealClient) Seal(secret qsealrc.Secret) error {
 
 	// Then we we seal the secret
 
+	sealingScope := v1alpha1.NamespaceWideScope
+	switch k.qsealrc.Scope {
+	case "strict":
+		sealingScope = v1alpha1.StrictScope
+	case "cluster-wide":
+		sealingScope = v1alpha1.ClusterWideScope
+	}
+
 	err = kubeseal.Seal(
 		k.clientConfig,
 		"yaml",
@@ -53,7 +61,7 @@ func (k *KubeSealClient) Seal(secret qsealrc.Secret) error {
 		out,
 		scheme.Codecs,
 		k.pubKey, // the pubKey
-		v1alpha1.StrictScope,
+		sealingScope,
 		false, // allow empty data
 		secret.Name,
 		k.qsealrc.Namespace,

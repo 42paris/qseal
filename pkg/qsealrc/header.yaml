@@ -17,6 +17,9 @@ controller_namespace: "kube-system"
 # The namespace where the sealed secrets are going to be created
 namespace: "default"
 
+# the scope of the sealed secrets, it can be either "strict", "namespace-wide" or "cluster-wide"
+scope: "namespace-wide"
+
 # This is the list of the secrets that are going to be sealed
 # it syntax is a bit like kustomize
 # secrets:

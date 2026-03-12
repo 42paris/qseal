@@ -11,6 +11,7 @@ const QsealrcFileName = "qsealrc.yaml"
 type Qsealrc struct {
 	Version             string   `yaml:"version" default:"1"`
 	Namespace           string   `yaml:"namespace" required:"true"`
+	Scope               string   `yaml:"scope" default:"namespace-wide" validate:"oneof=strict namespace-wide cluster-wide"`
 	ControllerName      string   `yaml:"controller_name" required:"true"`
 	ControllerNamespace string   `yaml:"controller_namespace" required:"true"`
 	Secrets             []Secret `yaml:"secrets"`
